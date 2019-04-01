@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foo-app
+  labels:
+    app: foo-app
+    tier: backend
+    version: v1
+spec:
+  selector:
+    matchLabels:
+      app: foo-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: foo-app
+    spec:
+      containers:
+      - name: foo-app
+        image: localhost:5000/my-microk8s-app
+        ports:
+        - containerPort: 8080
+        env:
+        - name: APP_NAME
+          value: FOO
+  

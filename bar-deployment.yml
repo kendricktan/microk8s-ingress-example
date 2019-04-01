@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bar-app
+  labels:
+    app: bar-app
+    tier: backend
+    version: v1
+spec:
+  selector:
+    matchLabels:
+      app: bar-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: bar-app
+    spec:
+      containers:
+      - name: bar-app
+        image: localhost:5000/my-microk8s-app
+        ports:
+        - containerPort: 8080
+        env:
+        - name: APP_NAME
+          value: BAR
+  
